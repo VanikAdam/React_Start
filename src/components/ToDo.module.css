@@ -1,0 +1,51 @@
+.inputSide{
+    margin-top:10px;
+ 
+}
+.inputSide div{
+text-align: center;
+}
+.inputSide input{
+    padding: 12px 20px;
+ 
+    border: 3px solid #ccc;
+    transition: 0.5s;
+    outline: none;
+}
+.inputSide input:focus{
+    border: 3px solid #555;
+   
+}
+.inputSide button{
+    margin-left:10px;
+    padding: 12px 6px;
+    border: 3px solid #555;
+    outline: none;
+    transition: 0.5s;
+}
+.inputSide button:active{
+    background-color: rgb(145, 112, 112);
+}
+
+.list{
+    list-style-type: none;
+    display: inline-block;
+    border: 1px solid rgba(190, 184, 184, 0.63);
+    background-color: rgb(25, 120, 133);
+    font-size: 16px bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding:50px;
+    position: relative;
+    border-radius: 4px;
+    margin:5px;
+    
+}
+.list span{
+    position: absolute; 
+    right: 5px;
+    top:5px
+}
+.listBoard{
+    margin:0;
+    padding: 0;
+}
