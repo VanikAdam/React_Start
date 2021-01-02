@@ -1,7 +1,8 @@
 
 import './App.css';
 import React from 'react';
-import  ToDo  from './components/ToDo';
+import ToDo from './components/todo/ToDo';
+
 // import Price from './components/Price';
 
 
