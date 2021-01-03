@@ -1,7 +1,4 @@
-.inputSide{
-    margin-top:10px;
- 
-}
+
 .inputSide div{
 text-align: center;
 }
@@ -30,29 +27,79 @@ text-align: center;
 .list{
     list-style-type: none;
     display: inline-block;
-    border: 1px solid rgba(190, 184, 184, 0.63);
-    background-color: rgb(31, 122, 122);
+    padding: 0 25px;
+   
+    /* background-color:#FFCF6A; */
+    background-color: #fff;;
     font-size: 16px bold;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    padding:50px;
+   /* #00b894; */
     position: relative;
-    border-radius: 4px;
-    margin:5px;
+    /* border-top-left-radius: 18px; */
+    margin:25px;
+    /* width:18%; */
+    
     
 }
 .list span{
     position: absolute; 
     right: 5px;
-    top:5px
+    top:5px;
+    display: inline-block;
+    background-color: #FFCA21;
+    color :#fff;
+    padding: 5px 10px;
+    border-radius: 20%;
+    font-size: 15px;
+    
+}
+.list span:hover{
+    cursor: pointer;
+    background-color: #fff;
+    color: #FFCA21;
 }
 .listBoard{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    justify-content: flex-start;
+    grid-gap: 5px;
     margin:0;
-    padding: 0;
+    padding: 10px;
 }
 .temp{
-    color:#fff;
+    /* color:#fff; */
 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
     font-size: 30px;
+}
+.listContent{
+ 
+    padding-top:15%;
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+    /* background-color:#2A365C; */
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    /* #ff7675 */
+}
+.taskText{
+    margin-top:0;
+    padding: 15px 0;
+    /* color: #fff; */
+  
+    font-size: 20px;
+   
+
+    
+}
+.weatherSide{
+    border-top: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.weatherIcon{
+    width: 30%;
 }
