@@ -21,8 +21,7 @@ class NewTask extends Component {
         if(currentValue!==''){
         this.props.onAdd(currentValue, date);
         this.setState({
-            currentValue:'',
-           date:''
+            currentValue:''           
         })
     }
     }
