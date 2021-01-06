@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import style from './ToDo.module.css';
-import NewTask from './tasks/NewTask';
-import images from './pic/Pic';
+import NewTask from './newTask/NewTask';
+import Task from './tasks/Task'
+import {Container, Row, Col} from 'react-bootstrap';
 
 class ToDo extends Component {
     constructor() {
@@ -22,25 +22,24 @@ class ToDo extends Component {
         fetch(url).then(data => data.json()).then(data => this.setState({ list: data.list }));
     }
 
-    removeTask = (index) => {
-        let tasks = this.state.tasks;
-        tasks.splice(index, 1);
+    removeTask = (index) =>()=> {
+        let newTasks = this.state.tasks.filter((task,ind)=>index!==ind);
         this.setState({
-            tasks
-        })
+            tasks: newTasks
+        });
     }
     addTask = (currentValue, date) => {
-
         let currentTasks = [...this.state.tasks];
-        let addedTask = [currentValue, date];
+        let addedTask = {
+            text:currentValue,
+            date: date
+        }
         let list = [...this.state.list];
         let find = false;
         let icon;
         let weather = '';
         for (let i = 0; i < list.length; i++) {
             let dt = list[i].dt_txt.slice(0, 10)
-
-
             if (date === dt) {
                 find = true;
                 icon = list[i].weather[0].icon;
@@ -49,55 +48,45 @@ class ToDo extends Component {
                     icon = 'P' + list[i + 1].weather[0].icon;
                     weather = Math.floor(list[i + 1].main.temp - 273);
                     weather += '°C';
-
-
                     break;
                 }
-
             }
-
-
         }
         if (!find) {
             icon = 'Punknown';
             weather = 'Unknown'
         }
 
-        addedTask.push(icon, weather);
+      
+        addedTask.icon=icon;
+            
+        addedTask.weather=weather;
+        
         currentTasks.push(addedTask);
         this.setState({
             tasks: currentTasks,
             currentValue: ''
-        })
+        });
     }
     render() {
-
-
-        let li = this.state.tasks.map((elem, index) => {
-
-            return <li key={index} className={style.list} >
-                <div className={style.listContent}>
-                    <p className={style.taskText}>{elem[0]}</p>
-                    <p>{elem[1]} </p>
-                    <span id={index} onClick={() => this.removeTask(index)}>Skip</span>
-                </div>
-                <div className={style.weatherSide}>
-                    <img src={images[elem[2]]} alt="" className={style.weatherIcon} />
-                    <p className={style.temp}>{elem[3]}</p>
-                </div>
-
-            </li>
+        const tasks = this.state.tasks.map((elem, index) => {
+            return <Col key={index}>
+                <Task elem={elem} remove={this.removeTask} id={index}/>              
+            </Col>
         })
-
         return (
 
-            <div className={style.inputSide}>
-                <NewTask onAdd={this.addTask} />
-                <ul className={style.listBoard}>
-                    {li}
-                </ul>
-            </div>
-        )
+            <Container>
+                <Row>
+                <Col md={{span:6, offset:3}}>
+                     <NewTask onAdd={this.addTask} />
+                </Col>
+                </Row>
+                <Row>
+                  {tasks}
+                </Row>
+            </Container>
+        );
     }
 }
 export default ToDo;

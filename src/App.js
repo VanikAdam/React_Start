@@ -2,6 +2,7 @@
 import './App.css';
 import React from 'react';
 import ToDo from './components/todo/ToDo';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 // import Price from './components/Price';
 

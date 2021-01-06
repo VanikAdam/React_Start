@@ -1,0 +1,10 @@
+.taskClose{
+   font-size: 26px;
+    transition: transform 42s linear;
+    color:#FD7E14;
+}
+.taskClose:hover{
+    color: #000;
+    cursor: pointer;
+    transform: rotate(9000deg)
+}
