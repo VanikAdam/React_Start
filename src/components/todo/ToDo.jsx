@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NewTask from './newTask/NewTask';
 import Task from './tasks/Task'
+import idGenerate from './../../helper/idGenerate'
 import {Container, Row, Col, Button} from 'react-bootstrap';
 
 class ToDo extends Component {
@@ -23,10 +24,34 @@ class ToDo extends Component {
     }
 
     removeTask = (index) =>()=> {
-        let newTasks = this.state.tasks.filter((task,ind)=>index!==ind);
+        let newTasks = this.state.tasks.filter((task)=>index!==task.id);
         this.setState({
             tasks: newTasks
         });
+    }
+    checkTask = () => (event) => {
+        
+   
+
+        let tasks=[...this.state.tasks];
+        tasks.forEach(element => {
+             if(event.target.id===element.id)
+            element.isChecked=event.target.checked;
+        })
+           
+       
+        this.setState({
+            tasks:tasks
+        })
+    }
+    removeCheckedTasks=()=>{
+        
+        let newTasks=this.state.tasks.filter((task)=>task.isChecked!==true);
+       
+        this.setState({
+            tasks: newTasks
+        });
+
     }
     addTask = (currentValue, date) => {
         let currentTasks = [...this.state.tasks];
@@ -61,7 +86,8 @@ class ToDo extends Component {
         addedTask.icon=icon;
             
         addedTask.weather=weather;
-        
+        addedTask.id=idGenerate();
+        addedTask.isChecked='false';
         currentTasks.unshift(addedTask);
         this.setState({
             tasks: currentTasks,
@@ -69,9 +95,9 @@ class ToDo extends Component {
         });
     }
     render() {
-        const tasks = this.state.tasks.map((elem, index) => {
-            return <Col key={index}>
-                <Task elem={elem} remove={this.removeTask} id={index}/>              
+        const tasks = this.state.tasks.map((elem) => {
+            return <Col key={elem.id}>
+                <Task elem={elem} remove={this.removeTask} checkTask={this.checkTask} />              
             </Col>
         })
         return (
@@ -82,7 +108,7 @@ class ToDo extends Component {
                      <NewTask onAdd={this.addTask} />
                 </Col>
                 </Row>
-                <Button variant="danger">Remove All cheched cards</Button>
+                <Button variant="danger" onClick={this.removeCheckedTasks}>Remove All cheched cards</Button>
                 <Row>
                 
                   {tasks}

@@ -11,8 +11,11 @@ function Task(props) {
             <Form>
                 <Form.Check
                     type="switch"
-                    id={'z'+props.id}
-                    label="Check this switch"
+                    id={props.elem.id}
+                    label="Check this switch"   
+                    onClick={props.checkTask()}
+                    
+                    
 
                 />
            </Form>
@@ -25,7 +28,7 @@ function Task(props) {
                 <Card.Text>
                     {props.elem.text}
                 </Card.Text>
-                <FontAwesomeIcon icon={faWindowClose} onClick={props.remove(props.id)} className={style.taskClose} />
+                <FontAwesomeIcon icon={faWindowClose} onClick={props.remove(props.elem.id)} className={style.taskClose} />
             </Card.Body>
         </Card>
     );
