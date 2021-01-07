@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import NewTask from './newTask/NewTask';
 import Task from './tasks/Task'
-import {Container, Row, Col} from 'react-bootstrap';
+import {Container, Row, Col, Button} from 'react-bootstrap';
 
 class ToDo extends Component {
-    constructor() {
-        super();
-        this.state = {
+    
+        state = {
             currentValue: '',
             tasks: [],
             list: ''
         };
+    componentDidMount(){
         let api = {
             key: '8efae59934ba47a35fd0964006fe0438',
             baseUrl: 'https://api.openweathermap.org/data/2.5/forecast?'
@@ -47,7 +47,7 @@ class ToDo extends Component {
                 if (icon.slice(-1) === 'd') {
                     icon = 'P' + list[i + 1].weather[0].icon;
                     weather = Math.floor(list[i + 1].main.temp - 273);
-                    weather += '°C';
+                    weather += '° C';
                     break;
                 }
             }
@@ -62,7 +62,7 @@ class ToDo extends Component {
             
         addedTask.weather=weather;
         
-        currentTasks.push(addedTask);
+        currentTasks.unshift(addedTask);
         this.setState({
             tasks: currentTasks,
             currentValue: ''
@@ -82,7 +82,9 @@ class ToDo extends Component {
                      <NewTask onAdd={this.addTask} />
                 </Col>
                 </Row>
+                <Button variant="danger">Remove All cheched cards</Button>
                 <Row>
+                
                   {tasks}
                 </Row>
             </Container>
