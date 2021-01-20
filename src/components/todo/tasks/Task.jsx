@@ -1,36 +1,64 @@
-import React, { memo } from 'react';
+import React, { PureComponent } from 'react';
 import images from './../pic/Pic';
 import style from './Task.module.css'
-import { Card, Form } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faWindowClose } from '@fortawesome/free-solid-svg-icons'
+import { Card, Form, Button} from 'react-bootstrap';
 
-function Task(props) {
+
+class Task extends PureComponent {
+    
+        state={
+            isChecked: this.props.elem.isChecked
+        }
+    
+ 
+  toggleCheckbox=(event)=>{
+ 
+      let check=!this.state.isChecked;
+   
+  
+      this.props.checkTask(event.target.id, check);
+
+      
+   
+      
+  }
+ editTask=()=>{
+    this.props.edittask(this.props.elem.id)
+ }
+   render(){
     return (
-        <Card style={{ width: '15rem' }}>
+        <Card style={{ width: '15rem' }} className={`${style.task+' '+(this.state.isChecked ? style.checked: '')}`}>
+         <Card.Title>{this.props.elem.title}</Card.Title>
             <Form>
                 <Form.Check
                     type="switch"
-                    id={props.elem.id}
+                    id={this.props.elem.id}
                     label="Check this switch"   
-                    onClick={props.checkTask()}
-                    
-                    
-
-                />
+                    onChange={this.toggleCheckbox}  
+                    defaultChecked={this.state.isChecked}          
+              />
            </Form>
-            <Card.Img style={{ width: '5rem' }} variant="top-left" src={images[props.elem.icon]} />
+            <Card.Img style={{ width: '5rem' }} variant="top-left" src={images[this.props.elem.icon]} />
             <Card.Text style={{ position: 'absolute', top: '30px', right: '20%' }}>
-                {props.elem.weather}
+                {this.props.elem.weather}
             </Card.Text>
             <Card.Body>
-                <Card.Title>{props.elem.date}</Card.Title>
+                <Card.Title>{this.props.elem.date}</Card.Title>
+               
                 <Card.Text>
-                    {props.elem.text}
+                    {this.props.elem.description}
                 </Card.Text>
-                <FontAwesomeIcon icon={faWindowClose} onClick={props.remove(props.elem.id)} className={style.taskClose} />
+
+                <Button variant="info"
+                 disabled={this.state.isChecked} onClick={this.editTask}>Edit Task</Button>
+
+                <Button variant="danger"  
+                onClick={this.props.remove(this.props.elem.id)} 
+                disabled={this.state.isChecked}>Remove Task</Button>
+               
             </Card.Body>
         </Card>
     );
 }
-export default memo(Task);
+}
+export default Task;
